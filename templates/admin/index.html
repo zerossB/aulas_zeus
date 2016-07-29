@@ -1,0 +1,12 @@
+{% extends "base.jinja" %}
+
+{% block title %}
+Admin
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <a href="{{url_for('admin.get_users')}}">Listar Usuarios</a>
+</div>
+{% endblock %}

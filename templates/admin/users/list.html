@@ -1,0 +1,33 @@
+{% extends "admin/index.html" %}
+
+{% block title %}
+    Lista Usuários
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Email</td>
+                <td>Ultimo Login</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td class="text-center"> <img class="img-circle" src="{{user.gravatar}}"/> </td>
+                <td>{{user.email}}</td>
+                <td>{{ user.last_login_at.strftime("%d/%m/%Y") }}</td>
+                <td> <input type="checkbox"
+                    id="{{user.pk}}" class="adm-cb" name="my-checkbox" data-on-text="Ativo"
+                    data-off-text="Inativo"
+                    {% if user.active %} checked {% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

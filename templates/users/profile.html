@@ -1,0 +1,27 @@
+{% extends "base.jinja" %}
+
+{% block title %}
+Perfíl
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <img class="img-circle img-responsive" src="{{url_for('users.profile_image')}}"/>
+        </div>
+        <div class="col-md-9">
+            <p><b>Nome: </b>{{current_user.fullname}}</p>
+            <p><b>Email: </b>{{ current_user.email }}</p>
+            <p><b>Último Acesso: </b>{{ current_user.last_login_at.strftime("%d/%m/%Y") }}</p>
+            <p><b>Admitido em: </b> {{ current_user.confirmed_at }} </p>
+            <p><b>Você se logou:</b> {{current_user.login_count}} vezes</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 right">
+            <a href="{{ url_for('users.profile_edit') }}" class="btn btn-info">Editar Perfil</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.jinja" %}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block title %}
+Edição de Perfíl
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <p>
+    {% if current_user.imagem %}
+        <img class="img-circle" alt="Avatar" src="{{ url_for('users.profile_image') }}">
+    {% else %}
+        <img class="img-circle" alt="Avatar" src="{{ current_user.gravatar }}">
+    {% endif %}</p>
+    <p><b>Email:</b> {{current_user.email}}</p>
+    <p><b>Ultimo Acesso:</b> {{current_user.last_login_at.strftime("%d/%m/%Y")}}</p>
+
+    <form action="{{ url_for('users.profile_edit')}}" method="post"
+        enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+        {{ form.endereco.hidden_tag() }}
+        {{ wtf.form_field(form.imagem) }}
+        {{ wtf.form_field(form.fullname) }}
+
+        {{ wtf.form_field(form.endereco.cep) }}
+        {{ wtf.form_field(form.endereco.tipo) }}
+        {{ wtf.form_field(form.endereco.endereco) }}
+        {{ wtf.form_field(form.endereco.bairro) }}
+        {{ wtf.form_field(form.endereco.numero) }}
+        {{ wtf.form_field(form.endereco.cidade) }}
+        {{ wtf.form_field(form.endereco.estado) }}
+        {{ wtf.form_field(form.endereco.complemento) }}
+        {{ wtf.form_field(form.submit, class="btn btn-success raised")}}
+    </form>
+    <br>
+</div>
+{% endblock %}
